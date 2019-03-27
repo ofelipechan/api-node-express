@@ -42,7 +42,7 @@ $ npm run lint
 
 ### Tests
 
-####Unity Test
+Unity Test
 
 ```bash
 $ npm run test
