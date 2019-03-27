@@ -2,18 +2,11 @@
 
 Author: Felipe Chan
 
-## Prerequisites
+## Requirements
 
 * [NodeJs](https://nodejs.org/) - Javascript
 * [Express](http://expressjs.com/) - Framework for NodeJs
 * [Mongodb](https://www.mongodb.com/) - Data Base
-
-
-## Acknowledgments
-
-* NodeJs
-* Mongoose
-* Express
 
 ### Install dependencies
 
@@ -21,10 +14,18 @@ Author: Felipe Chan
 $ npm install
 ```
 
-### Run API on local environment
+### Run API dev environment 
+WARNING: Check database credentials.
 
 ```bash
 $ npm start
+```
+
+### Run API on local environment
+WARNING: Must have local mongodb database installed. Check [Mongodb](https://www.mongodb.com/) 
+
+```bash
+$ npm run local
 ```
 
 API will be listening at 
@@ -33,9 +34,16 @@ API will be listening at
 $ http://localhost:3000
 ```
 
+### Run lint
+
+```bash
+$ npm run lint
+```
+
 ### Tests
 
-Unity Test
+####Unity Test
+
 ```bash
 $ npm run test
 ```
