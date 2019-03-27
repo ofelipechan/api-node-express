@@ -4,15 +4,15 @@ module.exports = {
     db: {
         username: "",
         password: "",
-        server: "localhost",
-        name: "<%= nodeapidatabase %>",
+        server: "",
+        name: "<%= node-api-dev %>",
         port: "27017",
-        database: "nodeapidatabase",
+        database: "node-api-dev",
         ssl: false,
         sslVerifyCertificate: false,
         replicaSet: "",
-        authSource: "nodeapidatabase",
-        retryWrites: true
+        authSource: "",
+        retryWrites: false
     },
     security: {
         jwt_secretkey: "2038D3129381234197744",
@@ -20,5 +20,5 @@ module.exports = {
         apiClientId: "my_node_api",
         appClientSecret: "my@node_api",
     },
-    environmentName: "local"
+    environmentName: "dev"
 };

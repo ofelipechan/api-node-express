@@ -8,8 +8,12 @@ mongoose.Promise = require("bluebird");
 function connection() {
 	var auth = `${config.db.username}:${config.db.password}`;
 	var conexao =
-    `mongodb://${auth}@${config.db.server}/${config.db.database}?authSource=${config.db.authSource}&retryWrites=${config.db.retryWrites}`;
+    `mongodb://${auth}@${config.db.server}/${config.db.database}?`;
 
+	if(config.db.authSource)
+		conexao += `authSource=${config.db.authSource}`;
+	if(config.db.retryWrites)
+		conexao += `&retryWrites=${config.db.retryWrites}`;
 	if (config.db.ssl)
 		conexao += `&ssl=${config.db.ssl}`;
 	if (config.db.replicaSet)
@@ -30,7 +34,7 @@ module.exports = mongoose.connect(config.environmentName === "local" ? localConn
 	useMongoClient: true
 })
 	.then((connection) => {
-		console.log(`Connected to database: ${config.environmentName}`);
+		console.log(`Connected to database: ${config.db.database}`);
 		return connection;
 	})
 	.catch((err) => console.error(err));
