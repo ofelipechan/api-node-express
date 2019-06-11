@@ -1,10 +1,10 @@
-# API Node.JS Express
+# API Node.js Express
 
 Author: Felipe Chan
 
 ## Requirements
 
-* [NodeJs](https://nodejs.org/) - Javascript
+* [Nodejs](https://nodejs.org/) - Javascript
 * [Mongodb](https://www.mongodb.com/) - Data Base
 
 ### Install dependencies
