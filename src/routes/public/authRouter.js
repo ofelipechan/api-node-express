@@ -4,7 +4,7 @@ const authService = require('../../services/authService');
 
 router.post('/signup', async (req, res) => {
 	try {
-		let response = await authService.signUp(req.body);
+		const response = await authService.signUp(req.body);
 		res.json(response);
 	} catch (error) {
 		res.status(400).send({

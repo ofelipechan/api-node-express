@@ -13,7 +13,7 @@ describe('USER', () => {
 
 	describe('CHECK USER', () => {
 		let sandbox;
-		let fakeUser = {
+		const fakeUser = {
 			email: 'fake@fake.com',
 			password: 'fakepass'
 		};
@@ -22,7 +22,7 @@ describe('USER', () => {
 			sandbox = sinon.createSandbox();
 			sandbox.stub(userRepository, 'findOne').callsFake((params) => {
 				if (params.email == fakeUser.email) {
-					let response = {
+					const response = {
 						email: params.email,
 						password: generateHash(fakeUser.password)
 					};
