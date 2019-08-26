@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "651f6bd0-1811-450d-b726-e324139d824a",
+		"name": "Node-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ENDPOINTS",
+			"item": [
+				{
+					"name": "SignUp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "faedd152-732c-4523-bd92-6b8ac2d44aa4",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.globals.set(\"token_api\", \"Bearer \" + jsonData.accessToken);",
+									"pm.globals.set(\"user_id\", jsonData._id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Felipe Chan\",\n\t\"email\": \"contato.felipechan@gmail.com\",\n\t\"password\": \"123456\",\n\t\"phones\": [\n\t\t{\n\t\t\t\"number\": \"99999-9999\",\n\t\t\t\"ddd\": \"11\"\n\t\t}\t\n\t]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/public/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"public",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign In",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ba8997eb-2c7d-4f98-bbbb-d2b43050da09",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.globals.set(\"token_api\", \"Bearer \" + jsonData.accessToken);",
+									"pm.globals.set(\"user_id\", jsonData._id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"contato.felipechan@gmail.com\",\n\t\"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/public/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"public",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token_api}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/user/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
