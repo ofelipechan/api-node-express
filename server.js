@@ -12,23 +12,28 @@ const privateRoute = require('./src/routes/private/index');
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || '0.0.0.0';
 
-db.connect();
-
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({'extended': false}));
+app.use(bodyParser.urlencoded({
+    'extended': false
+}));
 
 app.use(helmet());
 
 app.use('/api/v1/', privateRoute);
 app.use('/api/v1/public', publicRoute);
 
-app.listen(port, host);
 
-const today = new Date(); 
-const h = today.getHours(); 
-const m = today.getMinutes();
-const s = today.getSeconds();
-console.log('---------------------------------');
-console.warn('(' + h + ':' + m + ':' + s + ')');
-console.log('Server running at ' + host + ':' + port);
+db.connect().then(() => {
+        app.listen(port, host);
+        const today = new Date();
+        const hours = today.getHours() < 10 ? `0${today.getHours()}` : today.getHours();
+        const minutes = today.getMinutes() < 10 ? `0${today.getMinutes()}` : today.getMinutes();
+        const seconds = today.getSeconds() < 10 ? `0${today.getSeconds()}` : today.getSeconds();
+        console.log('---------------------------------');
+        console.warn(`Time: ${hours}:${minutes}:${seconds}`);
+        console.log('Server running at ' + host + ':' + port);
+    })
+    .catch((err) => {
+        console.error(err);
+    });
