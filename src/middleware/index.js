@@ -1,10 +1,10 @@
-const auth = require("./../services/authService");
+const auth = require('./../services/authService');
 
 const validateHeadersPrivate = (req, res, next) => {
-	var bearerHeader = req.headers["authorization"];
+	var bearerHeader = req.headers['authorization'];
 
-	if (typeof bearerHeader !== "undefined") {
-		const bearer = bearerHeader.split(" ");
+	if (typeof bearerHeader !== 'undefined') {
+		const bearer = bearerHeader.split(' ');
 		const bearerToken = bearer[1];
 		var token = bearerToken;
 
@@ -20,7 +20,7 @@ const validateHeadersPrivate = (req, res, next) => {
 	} else {
 		res.status(401).send({
 			error: true,
-			message: "Token não fornecido."
+			message: 'Token não fornecido.'
 		});
 	}
 };

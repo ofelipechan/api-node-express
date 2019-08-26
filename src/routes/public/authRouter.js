@@ -1,19 +1,19 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const authService = require("../../services/authService");
+const authService = require('../../services/authService');
 
-router.post("/signup", async (req, res) => {
+router.post('/signup', async (req, res) => {
 	try {
 		let response = await authService.signUp(req.body);
 		res.json(response);
 	} catch (error) {
 		res.status(400).send({
-			"mensagem": error.message ? error.message : error
+			'mensagem': error.message ? error.message : error
 		});
 	}
 });
 
-router.post("/signin", async (req, res) => {
+router.post('/signin', async (req, res) => {
 	try {
 		const email = req.body.email;
 		const senha = req.body.senha;
@@ -21,7 +21,7 @@ router.post("/signin", async (req, res) => {
 		res.json(response);
 	} catch (error) {
 		res.status(401).send({
-			"mensagem": error.message ? error.message : error
+			'mensagem': error.message ? error.message : error
 		});
 	}
 });

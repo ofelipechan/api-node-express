@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const userService = require("../../services/userService");
+const userService = require('../../services/userService');
 
 
-router.get("/:_id", async (req, res) => {
+router.get('/:_id', async (req, res) => {
 	try {
 		let id = req.params._id;
 		let user = await userService.getUserById(id);
@@ -11,7 +11,7 @@ router.get("/:_id", async (req, res) => {
 		res.json(user);
 	} catch (error) {
 		res.status(400).send({
-			"mensagem": error.message ? error.message : error
+			'mensagem': error.message ? error.message : error
 		});
 	}
 });

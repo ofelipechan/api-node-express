@@ -1,15 +1,15 @@
-const userRepository = require("../repositories/userRepository");
-const bcrypt = require("bcryptjs");
+const userRepository = require('../repositories/userRepository');
+const bcrypt = require('bcryptjs');
 
 function checkRequiredFields(user) {
 	if (!user.nome)
-		throw "Campo NOME não preenchido";
+		throw 'Campo NOME não preenchido';
 	if (!user.email)
-		throw "Campo EMAIL não preenchido";
+		throw 'Campo EMAIL não preenchido';
 	if (!user.senha)
-		throw "Campo SENHA não preenchido";
+		throw 'Campo SENHA não preenchido';
 	if (!user.telefones || user.telefones.length == 0)
-		throw "Campo TELEFONES não preenchido";
+		throw 'Campo TELEFONES não preenchido';
 
 	return true;
 }
@@ -29,7 +29,7 @@ const createUser = async (user) => {
 		});
 
 		if(exists)
-			throw "E-mail já existente";
+			throw 'E-mail já existente';
 
 		user.senha = generateHash(user.senha);
 
@@ -58,7 +58,7 @@ const getUserById = async (id) => {
 	let user = null;
 
 	if (!id || id.length < 5)
-		throw "id não fornecido";
+		throw 'id não fornecido';
 
 	user = await userRepository.findById(id);
 
@@ -70,10 +70,10 @@ const checkUser = async (email, password) => {
 		email: email.toLowerCase()
 	});
 	if (!user) {
-		throw "Usuário e/ou senha inválidos";
+		throw 'Usuário e/ou senha inválidos';
 	} else {
 		if (!validatePassword(password, user.senha))
-			throw "Usuário e/ou senha inválidos";
+			throw 'Usuário e/ou senha inválidos';
 		else {
 			delete user.senha;
 			return user;

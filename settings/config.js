@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-const environment = process.env.NODE_ENV || "local"; // local, dev
+const environment = process.env.NODE_ENV || 'dev'; // local, dev
 
-console.log("Enviroment running:", environment);
+console.log('Enviroment running:', environment);
 
-let config = require(`./environments/${environment}`);
+let env = require(`./environments/${environment}`);
 
-module.exports = config;
+module.exports = env;

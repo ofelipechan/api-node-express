@@ -1,44 +1,44 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const usuarioSchema = new mongoose.Schema({
-	"nome": {
+	'nome': {
 		type: String,
 		require: true
 	},
-	"email": {
+	'email': {
 		type: String,
-		default: "",
+		default: '',
 		lowercase: true
 	},
-	"senha": {
+	'senha': {
 		type: String,
-		default: "admin"
+		default: 'admin'
 	},
-	"telefones": [
+	'telefones': [
 		{
-			"_id": false,
-			"numero": {
+			'_id': false,
+			'numero': {
 				type: String
 			},
-			"ddd": { 
+			'ddd': { 
 				type: String
 			}
 		}
 	],
-	"data_criacao": {
+	'data_criacao': {
 		type: Date,
 		default: Date.now
 	},
-	"data_atualizacao": {
+	'data_atualizacao': {
 		type: Date,
 		default: null
 	},
-	"ultimo_login": {
+	'ultimo_login': {
 		type: Date,
 		default: Date.now
 	},
-	"token": {
+	'token': {
 		type: String,
-		default: ""
+		default: ''
 	}
 });
-module.exports = mongoose.model("usuario", usuarioSchema);
+module.exports = mongoose.model('usuario', usuarioSchema);

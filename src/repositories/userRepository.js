@@ -1,4 +1,4 @@
-const User = require("../models/usuario");
+const User = require('../models/usuario');
 
 const toJSON = (result) => {
 	if (result) {

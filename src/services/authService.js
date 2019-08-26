@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const jwt = require("jsonwebtoken");
-const security = require("../../settings/config").security;
-const userService = require("./userService");
+const jwt = require('jsonwebtoken');
+const security = require('../../settings/config').security;
+const userService = require('./userService');
 
 async function generateToken(user) {
 	let token = jwt.sign({
@@ -10,7 +10,6 @@ async function generateToken(user) {
 	}, security.jwt_secretkey, {
 		expiresIn: security.jwt_token_expire
 	});
-	//Expira em 1800 segundos (30 minutos)
 
 	await userService.updateUserToken(user._id, token);
 
@@ -55,14 +54,11 @@ const verifyToken = async (token) => {
 			let authData = jwt.verify(token, security.jwt_secretkey);
 			let user = await userService.getUserById(authData.user._id);
 			if (user.token != token)
-				return reject("Não autorizado");
+				return reject('Unauthorized');
 			else
 				return resolve(authData);
 		} catch (error) {
-			if (error.name == "TokenExpiredError")
-				reject("Sessão inválida");
-			else
-				reject("Não autorizado");
+			reject('Unauthorized');
 		}
 	});
 };

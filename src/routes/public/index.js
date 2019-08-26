@@ -1,14 +1,14 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const signUp = require("./authRouter");
+const signUp = require('./authRouter');
 
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
 	res.json({
-		"error": false,
-		"message": "API public routes is WORKING"
+		'error': false,
+		'message': 'Routes working'
 	});
 });
 
-router.use("/auth", signUp);
+router.use('/auth', signUp);
 
 module.exports = router;
