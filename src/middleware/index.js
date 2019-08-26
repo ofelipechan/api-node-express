@@ -1,12 +1,12 @@
 const auth = require('./../services/authService');
 
 const validateHeadersPrivate = (req, res, next) => {
-	var bearerHeader = req.headers['authorization'];
+	const bearerHeader = req.headers['authorization'];
 
 	if (typeof bearerHeader !== 'undefined') {
 		const bearer = bearerHeader.split(' ');
 		const bearerToken = bearer[1];
-		var token = bearerToken;
+		const token = bearerToken;
 
 		auth.verifyToken(token).then((authData) => {
 			req.user = authData.user;

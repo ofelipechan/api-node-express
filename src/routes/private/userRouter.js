@@ -5,9 +5,9 @@ const userService = require('../../services/userService');
 
 router.get('/:_id', async (req, res) => {
 	try {
-		let id = req.params._id;
-		let user = await userService.getUserById(id);
-		delete user.senha;
+		const id = req.params._id;
+		const user = await userService.getUserById(id);
+		delete user.password;
 		res.json(user);
 	} catch (error) {
 		res.status(400).send({

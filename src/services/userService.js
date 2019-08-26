@@ -2,13 +2,13 @@ const userRepository = require('../repositories/userRepository');
 const bcrypt = require('bcryptjs');
 
 function checkRequiredFields(user) {
-	if (!user.nome)
+	if (!user.name)
 		throw 'Campo NOME não preenchido';
 	if (!user.email)
 		throw 'Campo EMAIL não preenchido';
-	if (!user.senha)
-		throw 'Campo SENHA não preenchido';
-	if (!user.telefones || user.telefones.length == 0)
+	if (!user.password)
+		throw 'Campo password não preenchido';
+	if (!user.phones || user.phones.length == 0)
 		throw 'Campo TELEFONES não preenchido';
 
 	return true;
@@ -24,58 +24,55 @@ function generateHash(password) {
 
 const createUser = async (user) => {
 	if (checkRequiredFields(user)) {
-		let exists = await userRepository.findOne({
+		const exists = await userRepository.findOne({
 			email: user.email
 		});
 
 		if(exists)
 			throw 'E-mail já existente';
 
-		user.senha = generateHash(user.senha);
+		user.password = generateHash(user.password);
 
-		let newUser = await userRepository.create(user);
+		const newUser = await userRepository.create(user);
 
 		return {
 			_id: newUser._id,
-			data_criacao: newUser.data_criacao,
-			data_atualizacao: newUser.data_atualizacao,
-			ultimo_login: newUser.ultimo_login
+			creationDate: newUser.creationDate,
+			lastUpdate: newUser.lastUpdate,
+			lastLogin: newUser.lastLogin
 		};
 	}
 };
 
-const updateUserToken = async (userId, token) => {
+const updateUserToken = async (userId, newToken) => {
 	let user = await getUserById(userId);
 
-	user.token = token;
-	user.ultimo_login = new Date();
+	user.accessToken = newToken;
+	user.lastLogin = new Date();
 
 	await userRepository.updateOne(user);
-
 };
 
 const getUserById = async (id) => {
-	let user = null;
-
 	if (!id || id.length < 5)
 		throw 'id não fornecido';
 
-	user = await userRepository.findById(id);
+	const user = await userRepository.findById(id);
 
 	return user;
 };
 
 const checkUser = async (email, password) => {
-	let user = await userRepository.findOne({
+	const user = await userRepository.findOne({
 		email: email.toLowerCase()
 	});
 	if (!user) {
-		throw 'Usuário e/ou senha inválidos';
+		throw 'Usuário e/ou password inválidos';
 	} else {
-		if (!validatePassword(password, user.senha))
-			throw 'Usuário e/ou senha inválidos';
+		if (!validatePassword(password, user.password))
+			throw 'Usuário e/ou password inválidos';
 		else {
-			delete user.senha;
+			delete user.password;
 			return user;
 		}
 	}

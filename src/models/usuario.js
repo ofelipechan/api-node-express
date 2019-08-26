@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const usuarioSchema = new mongoose.Schema({
-	'nome': {
+	'firstName': {
+		type: String,
+		require: true
+	},
+	'lastName': {
 		type: String,
 		require: true
 	},
@@ -9,14 +13,14 @@ const usuarioSchema = new mongoose.Schema({
 		default: '',
 		lowercase: true
 	},
-	'senha': {
+	'password': {
 		type: String,
 		default: 'admin'
 	},
-	'telefones': [
+	'phones': [
 		{
 			'_id': false,
-			'numero': {
+			'number': {
 				type: String
 			},
 			'ddd': { 
@@ -24,19 +28,19 @@ const usuarioSchema = new mongoose.Schema({
 			}
 		}
 	],
-	'data_criacao': {
+	'creationDate': {
 		type: Date,
 		default: Date.now
 	},
-	'data_atualizacao': {
+	'lastUpdate': {
 		type: Date,
 		default: null
 	},
-	'ultimo_login': {
+	'lastLogin': {
 		type: Date,
 		default: Date.now
 	},
-	'token': {
+	'accessToken': {
 		type: String,
 		default: ''
 	}

@@ -5,21 +5,21 @@ const security = require('../../settings/config').security;
 const userService = require('./userService');
 
 async function generateToken(user) {
-	let token = jwt.sign({
+	const newToken = jwt.sign({
 		user
 	}, security.jwt_secretkey, {
 		expiresIn: security.jwt_token_expire
 	});
 
-	await userService.updateUserToken(user._id, token);
+	await userService.updateUserToken(user._id, newToken);
 
-	return token;
+	return newToken;
 }
 
 const signUp = async (user) => {
 	let newUser = await userService.createUser(user);
 
-	newUser.token = await generateToken(newUser);
+	newUser.accessToken = await generateToken(newUser);
 
 	return newUser;
 
@@ -28,19 +28,19 @@ const signUp = async (user) => {
 const getToken = (email, password) => {
 	return userService.checkUser(email, password)
 		.then(async (user) => {
-			let userData = {
+			const userData = {
 				email: user.email,
 				_id: user._id
 			};
 
-			var token = await generateToken(userData);
+			const accessToken = await generateToken(userData);
 
 			return {
 				_id: user._id,
-				data_criacao: user.data_criacao,
-				data_atualizacao: user.data_atualizacao,
-				ultimo_login: user.ultimo_login,
-				token
+				creationDate: user.creationDate,
+				lastUpdate: user.lastUpdate,
+				lastLogin: user.lastLogin,
+				accessToken
 			};
 		})
 		.catch((error) => {
@@ -49,18 +49,16 @@ const getToken = (email, password) => {
 };
 
 const verifyToken = async (token) => {
-	return await new Promise(async (resolve, reject) => {
-		try {
-			let authData = jwt.verify(token, security.jwt_secretkey);
-			let user = await userService.getUserById(authData.user._id);
-			if (user.token != token)
-				return reject('Unauthorized');
-			else
-				return resolve(authData);
-		} catch (error) {
-			reject('Unauthorized');
-		}
-	});
+	try {
+		const authData = jwt.verify(token, security.jwt_secretkey);
+		const user = await userService.getUserById(authData.user._id);
+		if (user.accessToken != token)
+			throw 'Unauthorized';
+		else
+			return authData;
+	} catch (error) {
+		throw 'Unauthorized';
+	}
 };
 
 module.exports = {

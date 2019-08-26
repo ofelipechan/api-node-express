@@ -16,8 +16,8 @@ router.post('/signup', async (req, res) => {
 router.post('/signin', async (req, res) => {
 	try {
 		const email = req.body.email;
-		const senha = req.body.senha;
-		let response = await authService.getToken(email, senha);
+		const password = req.body.password;
+		const response = await authService.getToken(email, password);
 		res.json(response);
 	} catch (error) {
 		res.status(401).send({

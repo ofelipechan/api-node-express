@@ -15,7 +15,7 @@ describe('USER', () => {
 		let sandbox;
 		let fakeUser = {
 			email: 'fake@fake.com',
-			senha: 'fakepass'
+			password: 'fakepass'
 		};
 
 		beforeEach(() => {
@@ -24,7 +24,7 @@ describe('USER', () => {
 				if (params.email == fakeUser.email) {
 					let response = {
 						email: params.email,
-						senha: generateHash(fakeUser.senha)
+						password: generateHash(fakeUser.password)
 					};
 					return Promise.resolve(response);
 				}
@@ -37,14 +37,14 @@ describe('USER', () => {
 
 		it(`should return invalid user message when email doesn't exist`, async () => {
 			try {
-				await user.checkUser('invalid@email.com', fakeUser.senha);
+				await user.checkUser('invalid@email.com', fakeUser.password);
 			} catch (error) {
-				expect(error).to.be.equal('Usuário e/ou senha inválidos');
+				expect(error).to.be.equal('Usuário e/ou password inválidos');
 			}
 		});
 
 		it('should return user data', async () => {
-			let response = await user.checkUser(fakeUser.email, fakeUser.senha);
+			const response = await user.checkUser(fakeUser.email, fakeUser.password);
 			expect(response).to.not.be.undefined;
 			expect(response).to.have.property('email');
 		});

@@ -21,7 +21,7 @@ const create = async (user) => {
 };
 
 const updateOne = async (user) => {
-	user.data_atualizacao = new Date();
+	user.lastUpdate = new Date();
 	return await User.updateOne({
 		_id: user._id
 	}, user);
