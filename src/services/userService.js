@@ -35,7 +35,7 @@ const createUser = async (user) => {
 	if (!fieldsValidation.status) {
 		throw fieldsValidation;
 	}
-	
+
 	const exists = await userRepository.findOne({
 		email: user.email
 	});
@@ -50,8 +50,6 @@ const createUser = async (user) => {
 	return {
 		_id: newUser._id,
 		creationDate: newUser.creationDate,
-		lastUpdate: newUser.lastUpdate,
-		lastLogin: newUser.lastLogin
 	};
 };
 
@@ -69,7 +67,9 @@ const getUserById = async (id) => {
 		throw 'Invalid id.';
 
 	const user = await userRepository.findById(id);
-
+	if (user) {
+		delete user.password;
+	}
 	return user;
 };
 
@@ -79,14 +79,13 @@ const checkUser = async (email, password) => {
 	});
 	if (!user) {
 		throw 'Invalid e-mail or password';
-	} else {
-		if (!validatePassword(password, user.password))
-			throw 'Invalid e-mail or password';
-		else {
-			delete user.password;
-			return user;
-		}
 	}
+
+	if (!validatePassword(password, user.password))
+		throw 'Invalid e-mail or password';
+
+	delete user.password;
+	return user;
 };
 
 module.exports = {

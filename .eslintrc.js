@@ -15,7 +15,7 @@ module.exports = {
     },    
     "rules": {
         "camelcase": "error",
-        "max-len": ["error", { "code": 170 }],
+        "max-len": ["error", { "code": 100 }],
         "comma-style": ["error", "last"],
         "semi": ["error", "always"],
         "quotes": ["error", "single"],

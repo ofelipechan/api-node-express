@@ -4,11 +4,10 @@ const validateHeadersPrivate = async (req, res, next) => {
 	const bearerHeader = req.headers['authorization'];
 
 	if (!bearerHeader) {
-		res.status(401).send({
+		return res.status(401).send({
 			error: true,
-			message: 'Token não fornecido.'
+			message: 'Authorization not provided.'
 		});
-		return;
 	}
 
 	const token = getTokenFromHeader(bearerHeader);

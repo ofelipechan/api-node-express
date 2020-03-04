@@ -16,33 +16,24 @@ async function generateToken(user) {
 	return newToken;
 }
 
-const signUp = async (user) => {
-	const newUser = await userService.createUser(user);
+const getToken = async (email, password) => {
+	try {
+		const user = await userService.checkUser(email, password);
+		const userData = {
+			email: user.email,
+			_id: user._id
+		};
 
-	return newUser;
-};
+		const accessToken = await generateToken(userData);
 
-const getToken = (email, password) => {
-	return userService.checkUser(email, password)
-		.then(async (user) => {
-			const userData = {
-				email: user.email,
-				_id: user._id
-			};
-
-			const accessToken = await generateToken(userData);
-
-			return {
-				_id: user._id,
-				creationDate: user.creationDate,
-				lastUpdate: user.lastUpdate,
-				lastLogin: user.lastLogin,
-				accessToken
-			};
-		})
-		.catch((error) => {
-			throw error;
-		});
+		return {
+			_id: user._id,
+			lastLogin: user.lastLogin,
+			accessToken
+		};
+	} catch (error) {
+		throw error;
+	}
 };
 
 const verifyToken = async (token) => {
@@ -60,6 +51,5 @@ const verifyToken = async (token) => {
 
 module.exports = {
 	getToken,
-	verifyToken,
-	signUp
+	verifyToken
 };

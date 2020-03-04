@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "651f6bd0-1811-450d-b726-e324139d824a",
-		"name": "Node-api",
+		"name": "Template Node API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -37,7 +37,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Felipe Chan\",\n\t\"email\": \"contato.felipechan@gmail.com\",\n\t\"password\": \"123456\",\n\t\"phones\": [\n\t\t{\n\t\t\t\"number\": \"99999-9999\",\n\t\t\t\"ddd\": \"11\"\n\t\t}\t\n\t]\n}"
+							"raw": "{\n\t\"name\": \"Felipe Chan\",\n\t\"email\": \"contato.felipechan@test.com\",\n\t\"password\": \"123456\",\n\t\"password_confirmation\": \"123456\",\n\t\"phones\": [\n\t\t{\n\t\t\t\"number\": \"99999-9999\",\n\t\t\t\"ddd\": \"11\"\n\t\t}\t\n\t]\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3000/api/v1/public/auth/signup",
@@ -86,7 +86,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"contato.felipechan@gmail.com\",\n\t\"password\": \"123456\"\n}"
+							"raw": "{\n\t\"email\": \"contato.felipechan@test.com\",\n\t\"password\": \"123456\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3000/api/v1/public/auth/signin",
@@ -117,10 +117,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "http://localhost:3000/api/v1/user/{{user_id}}",
 							"protocol": "http",
