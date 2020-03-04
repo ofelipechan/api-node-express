@@ -56,7 +56,7 @@ module.exports = {
         "comma-spacing": ["error", { "before": false, "after": true }],
         "computed-property-spacing": ["error", "never"],
         "key-spacing": ["error", { "beforeColon": false }],
-        "no-underscore-dangle": "error",
+        "no-underscore-dangle": ["error", { "allow": ["_id"] }],
         "no-param-reassign": ["error", { "props": false }],
         "prefer-arrow-callback": "error",
         "eqeqeq": "error",

@@ -1,17 +1,25 @@
 const userRepository = require('../repositories/userRepository');
 const bcrypt = require('bcryptjs');
+const Validator = require('validatorjs');
 
-function checkRequiredFields(user) {
-	if (!user.name)
-		throw 'Campo NOME não preenchido';
-	if (!user.email)
-		throw 'Campo EMAIL não preenchido';
-	if (!user.password)
-		throw 'Campo password não preenchido';
-	if (!user.phones || user.phones.length == 0)
-		throw 'Campo TELEFONES não preenchido';
+const validate = (body, rules, customMessages) => {
+	const validation = new Validator(body, rules, customMessages);
+	return {
+		errors: validation.errors.errors,
+		status: validation.passes()
+	};
+};
 
-	return true;
+function validateFields(user) {
+	const fieldsRules = {
+		name: 'required|string|min:3',
+		email: 'required|email',
+		phones: 'required|array',
+		password: 'required|string|min:6|confirmed',
+		gender: 'string'
+	};
+
+	return validate(user, fieldsRules, {});
 }
 
 function validatePassword(password, hash) {
@@ -23,29 +31,32 @@ function generateHash(password) {
 }
 
 const createUser = async (user) => {
-	if (checkRequiredFields(user)) {
-		const exists = await userRepository.findOne({
-			email: user.email
-		});
-
-		if(exists)
-			throw 'E-mail já existente';
-
-		user.password = generateHash(user.password);
-
-		const newUser = await userRepository.create(user);
-
-		return {
-			_id: newUser._id,
-			creationDate: newUser.creationDate,
-			lastUpdate: newUser.lastUpdate,
-			lastLogin: newUser.lastLogin
-		};
+	const fieldsValidation = validateFields(user);
+	if (!fieldsValidation.status) {
+		throw fieldsValidation;
 	}
+	
+	const exists = await userRepository.findOne({
+		email: user.email
+	});
+
+	if (exists)
+		throw 'E-mail already exists';
+
+	user.password = generateHash(user.password);
+
+	const newUser = await userRepository.create(user);
+
+	return {
+		_id: newUser._id,
+		creationDate: newUser.creationDate,
+		lastUpdate: newUser.lastUpdate,
+		lastLogin: newUser.lastLogin
+	};
 };
 
 const updateUserToken = async (userId, newToken) => {
-	let user = await getUserById(userId);
+	const user = await getUserById(userId);
 
 	user.accessToken = newToken;
 	user.lastLogin = new Date();
@@ -55,7 +66,7 @@ const updateUserToken = async (userId, newToken) => {
 
 const getUserById = async (id) => {
 	if (!id || id.length < 5)
-		throw 'id não fornecido';
+		throw 'Invalid id.';
 
 	const user = await userRepository.findById(id);
 
@@ -67,18 +78,16 @@ const checkUser = async (email, password) => {
 		email: email.toLowerCase()
 	});
 	if (!user) {
-		throw 'Usuário e/ou password inválidos';
+		throw 'Invalid e-mail or password';
 	} else {
 		if (!validatePassword(password, user.password))
-			throw 'Usuário e/ou password inválidos';
+			throw 'Invalid e-mail or password';
 		else {
 			delete user.password;
 			return user;
 		}
 	}
 };
-
-
 
 module.exports = {
 	checkUser,

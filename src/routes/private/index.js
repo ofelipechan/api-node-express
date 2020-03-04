@@ -7,8 +7,8 @@ const userRouter = require('./userRouter');
 
 router.get('/', (req, res) => {
 	res.json({
-		'error': false,
-		'message': 'Routes working'
+		error: false,
+		message: 'Routes working'
 	});
 });
 

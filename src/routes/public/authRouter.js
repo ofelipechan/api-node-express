@@ -8,7 +8,7 @@ router.post('/signup', async (req, res) => {
 		res.json(response);
 	} catch (error) {
 		res.status(400).send({
-			'mensagem': error.message ? error.message : error
+			mensagem: error.message ? error.message : error
 		});
 	}
 });
@@ -21,7 +21,7 @@ router.post('/signin', async (req, res) => {
 		res.json(response);
 	} catch (error) {
 		res.status(401).send({
-			'mensagem': error.message ? error.message : error
+			mensagem: error.message ? error.message : error
 		});
 	}
 });

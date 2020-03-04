@@ -7,8 +7,8 @@ const userService = require('./userService');
 async function generateToken(user) {
 	const newToken = jwt.sign({
 		user
-	}, security.jwt_secretkey, {
-		expiresIn: security.jwt_token_expire
+	}, security.jwtSecretkey, {
+		expiresIn: security.jwtTokenExpire
 	});
 
 	await userService.updateUserToken(user._id, newToken);
@@ -17,12 +17,9 @@ async function generateToken(user) {
 }
 
 const signUp = async (user) => {
-	let newUser = await userService.createUser(user);
-
-	newUser.accessToken = await generateToken(newUser);
+	const newUser = await userService.createUser(user);
 
 	return newUser;
-
 };
 
 const getToken = (email, password) => {
@@ -50,12 +47,12 @@ const getToken = (email, password) => {
 
 const verifyToken = async (token) => {
 	try {
-		const authData = jwt.verify(token, security.jwt_secretkey);
+		const authData = jwt.verify(token, security.jwtSecretkey);
 		const user = await userService.getUserById(authData.user._id);
-		if (user.accessToken != token)
+		if (!user || user.accessToken !== token)
 			throw 'Unauthorized';
-		else
-			return authData;
+
+		return authData;
 	} catch (error) {
 		throw 'Unauthorized';
 	}

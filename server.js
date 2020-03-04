@@ -15,7 +15,7 @@ const host = process.env.HOST || '0.0.0.0';
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    'extended': false
+    extended: false
 }));
 
 app.use(helmet());
@@ -30,9 +30,9 @@ db.connect().then(() => {
         const hours = today.getHours() < 10 ? `0${today.getHours()}` : today.getHours();
         const minutes = today.getMinutes() < 10 ? `0${today.getMinutes()}` : today.getMinutes();
         const seconds = today.getSeconds() < 10 ? `0${today.getSeconds()}` : today.getSeconds();
-        console.log('---------------------------------');
+        console.warn('---------------------------------');
         console.warn(`Time: ${hours}:${minutes}:${seconds}`);
-        console.log('Server running at ' + host + ':' + port);
+        console.warn('Server running at ' + host + ':' + port);
     })
     .catch((err) => {
         console.error(err);

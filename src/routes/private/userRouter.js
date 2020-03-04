@@ -11,7 +11,7 @@ router.get('/:_id', async (req, res) => {
 		res.json(user);
 	} catch (error) {
 		res.status(400).send({
-			'mensagem': error.message ? error.message : error
+			mensagem: error.message ? error.message : error
 		});
 	}
 });

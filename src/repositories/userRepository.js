@@ -3,9 +3,9 @@ const User = require('../models/usuario');
 const toJSON = (result) => {
 	if (result) {
 		return result.toJSON();
-	} else {
-		return null;
 	}
+
+	return null;
 };
 
 const findOne = async (conditions) => {

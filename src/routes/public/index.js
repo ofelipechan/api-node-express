@@ -4,8 +4,8 @@ const signUp = require('./authRouter');
 
 router.get('/', (req, res) => {
 	res.json({
-		'error': false,
-		'message': 'Routes working'
+		error: false,
+		message: 'Routes working'
 	});
 });
 

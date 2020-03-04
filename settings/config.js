@@ -1,8 +1,8 @@
 'use strict';
 
-const environment = process.env.NODE_ENV || 'dev'; // local, dev
+const environment = process.env.NODE_ENV || 'local'; // local, dev
 
-console.log('Enviroment running:', environment);
+console.warn('Enviroment running:', environment);
 
 const env = require(`./environments/${environment}`);
 

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable no-undef */
 const expect = require('chai').expect;
 const sinon = require('sinon');
@@ -10,7 +11,6 @@ function generateHash(password) {
 }
 
 describe('USER', () => {
-
 	describe('CHECK USER', () => {
 		let sandbox;
 		const fakeUser = {
@@ -21,7 +21,7 @@ describe('USER', () => {
 		beforeEach(() => {
 			sandbox = sinon.createSandbox();
 			sandbox.stub(userRepository, 'findOne').callsFake((params) => {
-				if (params.email == fakeUser.email) {
+				if (params.email === fakeUser.email) {
 					const response = {
 						email: params.email,
 						password: generateHash(fakeUser.password)
@@ -35,7 +35,7 @@ describe('USER', () => {
 			sandbox.restore();
 		});
 
-		it(`should return invalid user message when email doesn't exist`, async () => {
+		it('should return invalid user message when email doesnt exist', async () => {
 			try {
 				await user.checkUser('invalid@email.com', fakeUser.password);
 			} catch (error) {
@@ -48,7 +48,5 @@ describe('USER', () => {
 			expect(response).to.not.be.undefined;
 			expect(response).to.have.property('email');
 		});
-
 	});
-
 });
