@@ -39,7 +39,7 @@ describe('USER', () => {
 			try {
 				await user.checkUser('invalid@email.com', fakeUser.password);
 			} catch (error) {
-				expect(error).to.be.equal('Usuário e/ou password inválidos');
+				expect(error).to.be.equal('Invalid e-mail or password');
 			}
 		});
 
