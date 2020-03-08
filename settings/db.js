@@ -7,14 +7,15 @@ mongoose.Promise = require('bluebird');
 
 const connect = async () => {
 	try {
-		await mongoose.connect(config.db.connectionString, {
+		const connection = await mongoose.connect(config.db.connectionString, {
 			dbName: 'local',
 			useNewUrlParser: true
 		});
-		console.warn('Connected to database');
+		console.warn(`Connected to database ${config.db.name}`);
+		return connection;
 	} catch (error) {
 		console.error('Error on mongodb connection');
-		console.error(error);
+		throw error;
 	}
 };
 

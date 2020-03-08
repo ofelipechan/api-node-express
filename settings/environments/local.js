@@ -1,5 +1,6 @@
 module.exports = {
 	db: {
+		name: 'local',
 		connectionString: 'mongodb://localhost:27017/local'
 	},
 	security: {

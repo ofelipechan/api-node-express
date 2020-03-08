@@ -20,6 +20,12 @@ WARNING: Check database credentials.
 $ npm start
 ```
 
+You can also start with [Docker Compose](https://docs.docker.com/compose/install/)
+
+```bash
+$ docker-compose up
+```
+
 ### Run API on local environment
 WARNING: Must have local mongodb database installed. Check [Mongodb](https://www.mongodb.com/) 
 

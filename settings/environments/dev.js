@@ -1,6 +1,7 @@
 module.exports = {
     db: {
-        connectionString: ''
+        name: 'dev',
+        connectionString: 'mongodb://mongo:27017/docker-node-mongo'
     },
     security: {
         jwtSecretkey: '2038D3129381234197744',
