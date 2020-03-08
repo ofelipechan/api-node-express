@@ -39,15 +39,15 @@ API will be listening at
 $ http://localhost:3000
 ```
 
-### Run lint
+### Lint
 
 ```bash
 $ npm run lint
 ```
 
-### Tests
+### Test
 
-Unity Test
+Unit Test
 
 ```bash
 $ npm run test
