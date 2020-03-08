@@ -1,7 +1,5 @@
 # API Node.js Express
 
-Author: [Felipe S. Chan](https://github.com/ofelipechan)
-
 ## Requirements
 
 * [Nodejs](https://nodejs.org/) - Javascript
@@ -52,3 +50,9 @@ Unit Test
 ```bash
 $ npm run test
 ```
+
+## Author
+
+| [![github](https://avatars0.githubusercontent.com/u/26874734?v=3&s=115)](hhttps://github.com/ofelipechan "Checkout github") |
+|---|
+| [Felipe S. Chan](https://github.com/ofelipechan) |
