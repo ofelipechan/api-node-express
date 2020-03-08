@@ -1,6 +1,6 @@
 # API Node.js Express
 
-Author: Felipe Chan
+Author: [Felipe S. Chan](https://github.com/ofelipechan)
 
 ## Requirements
 
