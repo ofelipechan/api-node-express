@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  app:
+    container_name: docker-app
+    build: .
+    command: npm start
+    ports: 
+      - "3000:3000"
+    volumes:
+      - .:/usr/app
+    environment: 
+      - NODE_ENV=dev
+    links:
+      - mongo
+  mongo: 
+    container_name: mongoserver
+    image: mongo
+    ports:
+      - "27017:27017"
