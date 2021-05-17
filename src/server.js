@@ -2,18 +2,14 @@
 
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
-const db = require('./settings/db');
+const db = require('../settings/db');
 const cors = require('cors');
 const helmet = require('helmet');
-const publicRoute = require('./src/routes/public/index');
-const privateRoute = require('./src/routes/private/index');
+const publicRoute = require('./routes/public/index');
+const privateRoute = require('./routes/private/index');
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+app.use(express.json());
 
 app.use(helmet());
 

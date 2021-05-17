@@ -6,11 +6,12 @@ services:
     build: .
     command: npm start
     ports: 
-      - "3000:3000"
+      - "3100:3100"
     volumes:
       - .:/usr/app
     environment: 
       - NODE_ENV=dev
+      - PORT=3100
     links:
       - mongo
   mongo: 

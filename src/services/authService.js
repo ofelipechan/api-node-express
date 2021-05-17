@@ -32,6 +32,7 @@ const getToken = async (email, password) => {
 			accessToken
 		};
 	} catch (error) {
+		console.error('error while trying to get token');
 		throw error;
 	}
 };

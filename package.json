@@ -7,8 +7,8 @@
     "node": "7.10.1"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=dev node server.js",
-    "local": "cross-env NODE_ENV=local nodemon .",
+    "start": "cross-env NODE_ENV=dev node ./src/server.js",
+    "local": "cross-env NODE_ENV=local nodemon ./src/server.js",
     "test": "mocha test/unit || true",
     "lint": "eslint ./",
     "zip": "git archive -v -o app.zip --format=zip HEAD"
@@ -22,13 +22,12 @@
   "homepage": "www.felipechan.com.br",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "cross-env": "^5.2.0",
     "express": "^4.16.2",
-    "helmet": "^3.12.0",
+    "helmet": "^4.6.0",
     "jsonwebtoken": "^8.1.0",
-    "mongoose": "^5.6.11",
+    "mongoose": "^5.12.9",
     "request": "^2.88.0",
     "validatorjs": "^3.18.1"
   },
@@ -37,8 +36,8 @@
     "eslint": "^5.15.3",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "mocha": "^6.2.0",
-    "nodemon": "^1.18.10",
+    "mocha": "^8.4.0",
+    "nodemon": "^2.0.7",
     "sinon": "^7.3.1"
   }
 }
